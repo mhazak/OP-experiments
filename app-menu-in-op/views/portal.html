@@ -230,16 +230,39 @@
 					
 					display: function() {
 						let el = this.el();
+						console.log(el);
 						let header = el.siblings('.app-head')[0].id;
 						let opacity = $(el).css('opacity') !== '1' ? '1' : '0';
-						let transform = opacity === '1' ? '1' : 0;
-						let height = opacity === '1' ? '360px' : '0';
-						let bg_color = opacity === '1' ? 'var(--color)' : 'transparent';
-						let color = opacity === '1' ? 'white' : 'black';
-						let fweight = opacity === '1' ? 'bold' : '400';
-						let transition_on = `transition: height 1s ease-in-out, 2s opacity ease-in-out;`;
+						let transform, height, bg_color, color, fweight, transition;
+						let transition_on = `transition: height 1s ease-in-out, 1.5s opacity ease-in-out;`;
 						let transition_off = `transition: height 1s ease-in-out;`;
-						let transition = opacity === '1' ? transition_on : transition_off;
+						
+						// if app menu is visible
+						if (opacity === '1') {
+
+							transform = '1';
+							height = '360px';
+							bg_color = 'var(--color)';
+							color = 'white';
+							fweight = 'bold';
+							transition = transition_on;
+						
+						// app menu is not visible
+						} else {
+							
+							transform = 0;
+							height = '0';
+							bg_color = 'transparent';
+
+							// if app is not running
+							if (!$(el.siblings()[0]).hasClass('running')) {
+								color = 'black';
+								fweight = '400';
+							}
+
+							transition = transition_off;
+						}
+
 						CSS(`#item-${this.id} { height: ${height}; opacity: ${opacity}; ${transition}`);
 						CSS(`#app-${this.id} { font-weight: ${fweight}; }`);
 						CSS(`#${header} { background-color: ${bg_color}; color: ${color}; }`);
@@ -250,6 +273,7 @@
 				page.display();
 				
 			};
+
 
 			exports.sort = function(apps) {
 				for (var i = 0; i < apps.length; i++) {
@@ -300,14 +324,26 @@
 
 			exports.open = function(el) {
 
+				if (common.page) {
+					let selected = document.querySelectorAll(`[data-page=${common.page}]`);
+					CSS(`[data-page=${common.page}] { background-image: none; font-weight: 400; }`);
+
+					console.log('common page is ', common.page);
+				}
+
 				// page which should open
 				let page = el.attrd('page');
-				
 				let data = {
 					type: 'open_page',
 					page: page
 				};
-				console.log('odosielam z portal/open :', data);
+
+				CSS(`[data-page=${page}] { background-image: linear-gradient(315deg, #deebdd 0%, #bbdbbe 74%); font-weight: bold; }`);
+				let selected = document.querySelectorAll(`[data-page=${page}]`);
+				// seleted[0].style
+				
+				SET('common.page', page);
+				console.log('set common.page to: ', page);
 				if (el.hclass('disabled'))
 					return;
 
