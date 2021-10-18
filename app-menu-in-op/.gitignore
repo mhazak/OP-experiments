@@ -1,0 +1,6 @@
+tmp
+node_modules
+databases
+index.js.json
+index.pid
+package-lock.json

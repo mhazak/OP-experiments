@@ -8,11 +8,11 @@ body { background: var(--background_scheme); }
 body.ui-dark { background: #808080 linear-gradient(#5f5e50,#565656); }
 
 header { width: 200px; background: rgba(255,255,255,0.8); box-shadow: 0 3px 10px rgba(0,0,0,0.1); position: absolute; left: 15px; top: 15px; bottom: 15px; z-index: 1; border-radius: var(--radius); }
-header .status { float: right; width: 45px; background-color: transparent; height: 45px; border: 0; border-left: 1px solid rgba(0,0,0,0.09); text-align: center; line-height: 45px; font-size: 20px; cursor: pointer; padding: 0; }
+header .status { float: right; width: 45px; background-color: transparent; height: 45px; border: 0; text-align: center; line-height: 45px; font-size: 20px; cursor: pointer; padding: 0; }
 header .status i { transition: all 0.3s; }
 header .status:hover { opacity: 0.9; }
 header .status.warning:before { content: '\f071'; font-family: 'Font Awesome 5 Free', 'Font Awesome 5 Pro'; font-weight: 400; color: #ff7a00; text-align: center; width: 12px; height: 12px; line-height: 12px; border-radius: 100px; position: absolute; font-size: 9px; font-weight: bold; margin: 25px 0 0 15px; z-index: 5; }
-header .datetime { height: 45px; text-align: center; font-size: 12px; padding: 5px 0 0; border-top: 1px solid rgba(0,0,0,0.09); }
+header .datetime { text-align: center; font-size: 12px; padding: 5px 0 0; }
 header .menu { float: left; width: 45px; height: 45px; border: 0; background-color: transparent; font-size: 16px; padding: 3px 0 0 3px; border-radius: var(--radius) 0 0 var(--radius); }
 .menushow header .menu, header .menu:hover { background-color: var(--color); }
 .menushow header .menu b, header .menu:hover b { background-color: #FFF; }
