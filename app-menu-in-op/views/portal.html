@@ -24,7 +24,7 @@
 	header { background-color: transparent; box-shadow: none; }
 	.header { background-color: #f1dfd1; background-image: linear-gradient(315deg, #f1dfd1 0%, #f6f0ea 74%); border-radius: 1rem; height: 8rem; }
 	header .apps .app { height: auto; }
-	.menu-items { list-style: none; opacity: 0; margin: 0; padding: 0; height: 0; border: 2px solid var(--color); border-top: 0; transition: all 1s ease-in-out; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; }
+	.menu-items { list-style: none; opacity: 0; margin: 0; padding: 0; height: 0; border: 2px solid var(--color); border-top: 0; transition: height 1s ease-in-out, 2s opacity ease-in-out; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; }
 	.menu-items.selected { background-color: var(--color); color: white; }
 	.menu_items__item { padding-left: 3rem; font-weight: 400; }
 	.menu_items__item--icon { color: var(--color); margin-right: 10px; }
@@ -230,8 +230,6 @@
 					
 					display: function() {
 						let el = this.el();
-						console.log(el);
-						SET('fokume', el);
 						let header = el.siblings('.app-head')[0].id;
 						let opacity = $(el).css('opacity') !== '1' ? '1' : '0';
 						let transform = opacity === '1' ? '1' : 0;
@@ -239,7 +237,10 @@
 						let bg_color = opacity === '1' ? 'var(--color)' : 'transparent';
 						let color = opacity === '1' ? 'white' : 'black';
 						let fweight = opacity === '1' ? 'bold' : '400';
-						CSS(`#item-${this.id} { height: ${height}; opacity: ${opacity}`);
+						let transition_on = `transition: height 1s ease-in-out, 2s opacity ease-in-out;`;
+						let transition_off = `transition: height 1s ease-in-out;`;
+						let transition = opacity === '1' ? transition_on : transition_off;
+						CSS(`#item-${this.id} { height: ${height}; opacity: ${opacity}; ${transition}`);
 						CSS(`#app-${this.id} { font-weight: ${fweight}; }`);
 						CSS(`#${header} { background-color: ${bg_color}; color: ${color}; }`);
 					}
