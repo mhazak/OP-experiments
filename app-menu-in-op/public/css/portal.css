@@ -8,7 +8,7 @@ body { background: var(--background_scheme); }
 body.ui-dark { background: #808080 linear-gradient(#5f5e50,#565656); }
 
 header { width: 200px; background: rgba(255,255,255,0.8); box-shadow: 0 3px 10px rgba(0,0,0,0.1); position: absolute; left: 15px; top: 15px; bottom: 15px; z-index: 1; border-radius: var(--radius); }
-header .status { float: right; width: 45px; background-color: transparent; height: 45px; border: 0; text-align: center; line-height: 45px; font-size: 20px; cursor: pointer; padding: 0; }
+header .status { width: 45px; background-color: transparent; height: 45px; border: 0; text-align: center; line-height: 45px; font-size: 20px; cursor: pointer; padding: 0; }
 header .status i { transition: all 0.3s; }
 header .status:hover { opacity: 0.9; }
 header .status.warning:before { content: '\f071'; font-family: 'Font Awesome 5 Free', 'Font Awesome 5 Pro'; font-weight: 400; color: #ff7a00; text-align: center; width: 12px; height: 12px; line-height: 12px; border-radius: 100px; position: absolute; font-size: 9px; font-weight: bold; margin: 25px 0 0 15px; z-index: 5; }
