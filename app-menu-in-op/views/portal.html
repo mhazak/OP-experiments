@@ -26,7 +26,7 @@
 	header .apps .app { height: auto; }
 	.menu-items { list-style: none; opacity: 0; margin: 0; padding: 0; height: 0; border-bottom: 2px solid var(--color); border-top: 0; transition: height 1s ease-in-out, 2s opacity ease-in-out; }
 	.menu-items.selected { background-color: var(--color); color: white; }
-	.menu_items__item { padding-left: 3rem; font-weight: 400; }
+	.menu_items__item { padding-left: 3rem; font-weight: 400; height: 0; width: 0; }
 	/* .menu_items__item:first-child { margin-top: 1rem; } */
 	.menu_items__item--icon { color: var(--color); margin-right: 10px; }
 	.apps, .header { transition: .5s; }
@@ -69,64 +69,73 @@
 					<img src="./Microsoft_logo_(2012).svg.png" alt="logo" style="width:20rem;">
 				</div> -->
 			</div>
+			
+			<!-- viewbox with apps -->
 			<div data---="viewbox__user.apps__margin:@{if CONF.allowclock}100@{else}55@{fi};scrollbar:1;visibleY:0;scrollbarshadow:1" class="invisible app__viewbox">
 
 				@{part('menu')}
-
-				<div data-bind="user.noapps__hide">
-					<div class="apps" style="background-image: linear-gradient(315deg,#f1dfd1 0%,#f6f0ea 74%);">
-						<div data---="movable__null__selector:.app;exec:view/sort" data-bind="user.apps__template:.app">
-							<script type="text/html">
-								{{ foreach m in value }}
-									{{ if !m.internal && m.online }}
-									<div class="app exec{{ if m.isrunning }} running{{ fi }}" data-exec="view/open" data-id="{{ m.id }}" draggable="true">
-										<span class="close exec" data-exec="view/inlineclose" data-prevent="true"><i class="fas fa-times"></i></span>
-										{{ if m.countbadges || m.countnotifications }}<span class="badges"></span>{{ fi }}
-										<div class="icon"><i class="{{ m.icon | icon }}"></i></div>
-										<div class="name">{{ m.title }}</div>
-									</div>
-									{{ fi }}
-								{{ end }}
-							</script>
-						</div>
-					</div>
-					<hr />
-				</div>
-				<br data-bind="user.noapps__show" />
-				<div class="apps" style="background-image: linear-gradient(315deg,#f1dfd1 0%,#f6f0ea 74%); border-radius: 1rem; padding: 2rem 0;">
-				
-					@{if !user.guest}
-
-						<div data-bind="user.apps__template:.app">
-							<script type="text/html">
-								{{ foreach m in value }}
-									{{ if m.internal }}
-									<div class="app">
-										<div class="app-head exec{{ if m.isrunning }} running{{ fi }}" data-exec="view/show_items" data-id="{{ m.id }}" draggable="true" id="app-{{ m.id }}">
+				<div style='background-color: red !important;'>
+					<div data-bind="user.noapps__hide">
+						<div class="apps" style="background-image: linear-gradient(315deg,#f1dfd1 0%,#f6f0ea 74%);">
+							<div data---="movable__null__selector:.app;exec:view/sort" data-bind="user.apps__template:.app">
+								<script type="text/html">
+									{{ foreach m in value }}
+										{{ if !m.internal && m.online }}
+										<div class="app exec{{ if m.isrunning }} running{{ fi }}" data-exec="view/open" data-id="{{ m.id }}" draggable="true">
 											<span class="close exec" data-exec="view/inlineclose" data-prevent="true"><i class="fas fa-times"></i></span>
 											{{ if m.countbadges || m.countnotifications }}<span class="badges"></span>{{ fi }}
 											<div class="icon"><i class="{{ m.icon | icon }}"></i></div>
 											<div class="name">{{ m.title }}</div>
 										</div>
-										
-										<!-- if application have defined its menu -->
-										{{ if m.menu }}
-											<ul class="menu-items" id="item-{{ m.id }}">
-												{{ foreach menu_item in m.menu }}
-													<li class="menu_items__item exec" data-exec="view/open" data-id="{{ m.id }}" data-page="{{ menu_item.common.page }}"><i class="{{ menu_item.icon }} menu_items__item--icon"></i> {{ menu_item.name }}</li>
-												{{ end }}
-											</ul>
 										{{ fi }}
-									</div>
-
-									{{ fi }}
-								{{ end }}
-							</script>
+									{{ end }}
+								</script>
+							</div>
 						</div>
+						<hr />
+					</div>
+					<br data-bind="user.noapps__show" />
+					
+					<!-- applications -->
+					<div class="apps" style="background-image: linear-gradient(315deg,#f1dfd1 0%,#f6f0ea 74%); border-radius: 1rem; padding: 2rem 0;">
+					
+						@{if !user.guest}
+							<b>Applications:</b>
+							<div data-bind="user.apps__template:.app">
+								<script type="text/html">
+									{{ foreach m in value }}
+										{{ if m.internal }}
+										<div class="app">
+											<div class="app-head exec{{ if m.isrunning }} running{{ fi }}" data-exec="view/show_items" data-id="{{ m.id }}" draggable="true" id="app-{{ m.id }}">
+												<span class="close exec" data-exec="view/inlineclose" data-prevent="true"><i class="fas fa-times"></i></span>
+												{{ if m.countbadges || m.countnotifications }}<span class="badges"></span>{{ fi }}
+												<div class="icon"><i class="{{ m.icon | icon }}"></i></div>
+												<div class="name">{{ m.title }}</div>
+											</div>
+											
+											<!-- if application have defined its menu -->
+											{{ if m.menu }}
+												<ul class="menu-items" id="item-{{ m.id }}">
+													{{ foreach menu_item in m.menu }}
+														<li class="menu_items__item exec" data-exec="view/open" data-id="{{ m.id }}" data-page="{{ menu_item.common.page }}"><i class="{{ menu_item.icon }} menu_items__item--icon"></i> {{ menu_item.name }}</li>
+													{{ end }}
+												</ul>
+											{{ fi }}
+										</div>
 
-					@{fi}
+										{{ fi }}
+									{{ end }}
+								</script>
+							</div>
 
+						@{fi}
+
+					</div>
+
+				<!-- end of red bg -->
 				</div>
+			
+			<!-- end of viewbox -->
 			</div>
 			
 			<div style="background-image: linear-gradient(315deg,#f1dfd1 0%,#f6f0ea 74%); margin-top: -525px; border-radius: 10px; padding: 10px 0;">
@@ -246,7 +255,7 @@
 						console.log(el);
 						let header = el.siblings('.app-head')[0].id;
 						let opacity = $(el).css('opacity') !== '1' ? '1' : '0';
-						let transform, height, bg_color, color, fweight, transition;
+						let transform, height, bg_color, color, fweight, transition, li_width, li_height;
 						let transition_on = `transition: height 1s ease-in-out, 1.5s opacity ease-in-out;`;
 						let transition_off = `transition: height 1s ease-in-out;`;
 						
@@ -259,10 +268,14 @@
 							color = 'white';
 							fweight = 'bold';
 							transition = transition_on;
+							li_width = '100%';
+							li_height = 'auto';
 						
 						// app menu is not visible
 						} else {
 							
+							li_width = 0;
+							li_height = 0;
 							transform = 0;
 							height = '0';
 							bg_color = 'transparent';
@@ -279,6 +292,7 @@
 						CSS(`#item-${this.id} { height: ${height}; opacity: ${opacity}; ${transition}`);
 						CSS(`#app-${this.id} { font-weight: ${fweight}; }`);
 						CSS(`#${header} { background-color: ${bg_color}; color: ${color}; }`);
+						CSS(`.menu_items__item { width: ${li_width}; height: ${li_height};`);
 					}
 				};
 				
@@ -356,7 +370,6 @@
 				// seleted[0].style
 				
 				SET('common.page', page);
-				console.log('set common.page to: ', page);
 				if (el.hclass('disabled'))
 					return;
 
