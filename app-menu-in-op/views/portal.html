@@ -94,78 +94,79 @@
 				</div>
 				<br data-bind="user.noapps__show" />
 				<div class="apps" style="background-image: linear-gradient(315deg,#f1dfd1 0%,#f6f0ea 74%); border-radius: 1rem; padding: 2rem 0;">
-				@{if !user.guest}
+				
+					@{if !user.guest}
 
-					<div data-bind="user.apps__template:.app">
-						<script type="text/html">
-							{{ foreach m in value }}
-								{{ if m.internal }}
-								<div class="app">
-									<div class="app-head exec{{ if m.isrunning }} running{{ fi }}" data-exec="view/show_items" data-id="{{ m.id }}" draggable="true" id="app-{{ m.id }}">
-										<span class="close exec" data-exec="view/inlineclose" data-prevent="true"><i class="fas fa-times"></i></span>
-										{{ if m.countbadges || m.countnotifications }}<span class="badges"></span>{{ fi }}
-										<div class="icon"><i class="{{ m.icon | icon }}"></i></div>
-										<div class="name">{{ m.title }}</div>
+						<div data-bind="user.apps__template:.app">
+							<script type="text/html">
+								{{ foreach m in value }}
+									{{ if m.internal }}
+									<div class="app">
+										<div class="app-head exec{{ if m.isrunning }} running{{ fi }}" data-exec="view/show_items" data-id="{{ m.id }}" draggable="true" id="app-{{ m.id }}">
+											<span class="close exec" data-exec="view/inlineclose" data-prevent="true"><i class="fas fa-times"></i></span>
+											{{ if m.countbadges || m.countnotifications }}<span class="badges"></span>{{ fi }}
+											<div class="icon"><i class="{{ m.icon | icon }}"></i></div>
+											<div class="name">{{ m.title }}</div>
+										</div>
+										
+										<!-- if application have defined its menu -->
+										{{ if m.menu }}
+											<ul class="menu-items" id="item-{{ m.id }}">
+												{{ foreach menu_item in m.menu }}
+													<li class="menu_items__item exec" data-exec="view/open" data-id="{{ m.id }}" data-page="{{ menu_item.common.page }}"><i class="{{ menu_item.icon }} menu_items__item--icon"></i> {{ menu_item.name }}</li>
+												{{ end }}
+											</ul>
+										{{ fi }}
 									</div>
-									
-									<!-- if application have defined its menu -->
-									{{ if m.menu }}
-										<ul class="menu-items" id="item-{{ m.id }}">
-											{{ foreach menu_item in m.menu }}
-												<li class="menu_items__item exec" data-exec="view/open" data-id="{{ m.id }}" data-page="{{ menu_item.common.page }}"><i class="{{ menu_item.icon }} menu_items__item--icon"></i> {{ menu_item.name }}</li>
-											{{ end }}
-										</ul>
+
 									{{ fi }}
-								</div>
+								{{ end }}
+							</script>
+						</div>
 
-								{{ fi }}
-							{{ end }}
-						</script>
-					</div>
-
-					@{if CONF.allowprofile}
-					<div class="app app-head exec" data-exec="openplatform/profile" data-id="profile">
-						<div class="icon"><i class="fas fa-user-circle"></i></div>
-						@(My account)
-					</div>
 					@{fi}
-
-					@{if CONF.allowmembers}
-					<div class="app app-head exec" data-exec="openplatform/members">
-						<div class="icon"><i class="fa fa-users"></i></div>
-						@(Members)
-					</div>
-					@{fi }
-
-					<div class="app app-head exec" data-exec="openplatform/sessions">
-						<div class="icon"><i class="fa fa-history"></i></div>
-						@(My sessions)
-					</div>
-
-					@{if user.pin}
-					<div class="app app-head exec" data-exec="openplatform/lock">
-						<div class="icon"><i class="fa fa-lock"></i></div>
-						@(Lock screen)
-					</div>
-					@{fi}
-
-				@{fi}
-
-					<div class="app app-head exec" data-exec="openplatform/console" data-bind="common.consolecount__.b">
-						<div class="icon"><i class="fa fa-clipboard-list"></i></div>
-						@(Console)
-					</div>
-
-					<div class="app app-head exec" data-exec="openplatform/logout">
-						<div class="icon"><i class="fa fa-power-off red"></i></div>
-						@(Sign out)
-					</div>
 
 				</div>
 			</div>
 			
-			<div style="background-image: linear-gradient(315deg,#f1dfd1 0%,#f6f0ea 74%); margin-top: -125px; border-radius: 10px; padding: 10px 0;">
+			<div style="background-image: linear-gradient(315deg,#f1dfd1 0%,#f6f0ea 74%); margin-top: -525px; border-radius: 10px; padding: 10px 0;">
 				
+				@{if CONF.allowprofile}
+					<div class="app app-head exec" data-exec="openplatform/profile" data-id="profile">
+						<div class="icon"><i class="fas fa-user-circle"></i></div>
+						@(My account)
+					</div>
+				@{fi}
+
+				@{if CONF.allowmembers}
+					<div class="app app-head exec" data-exec="openplatform/members">
+						<div class="icon"><i class="fa fa-users"></i></div>
+						@(Members)
+					</div>
+				@{ fi }
+
+				<div class="app app-head exec" data-exec="openplatform/sessions">
+					<div class="icon"><i class="fa fa-history"></i></div>
+					@(My sessions)
+				</div>
+
+				@{if user.pin}
+					<div class="app app-head exec" data-exec="openplatform/lock">
+						<div class="icon"><i class="fa fa-lock"></i></div>
+						@(Lock screen)
+					</div>
+				@{fi}
+
+				<div class="app app-head exec" data-exec="openplatform/console" data-bind="common.consolecount__.b">
+					<div class="icon"><i class="fa fa-clipboard-list"></i></div>
+					@(Console)
+				</div>
+
+				<div class="app app-head exec" data-exec="openplatform/logout">
+					<div class="icon"><i class="fa fa-power-off red"></i></div>
+					@(Sign out)
+				</div>
+
 				@{if CONF.allowclock}
 					<div style="display: flex;">
 						@{if !user.guest && CONF.allowstatus} @{fi}
@@ -179,7 +180,9 @@
 					<div style="width: 100%; text-align: center; margin-top: 20px;">
 						<img src="./logo.png" alt="Your logo" style="width: 110px;">
 					</div>
+
 				@{fi}
+
 			</div>
 
 		</header>
