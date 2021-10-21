@@ -22,9 +22,9 @@
 
 <style>
 	header { background-color: transparent; box-shadow: none; }
-	.header { background-color: #f1dfd1; background-image: linear-gradient(315deg, #f1dfd1 0%, #f6f0ea 74%); border-radius: 1rem; height: 8rem; }
+	.header { background-color: #f1dfd1; background-image: linear-gradient(315deg, #f1dfd1 0%, #f6f0ea 74%); border-radius: 1rem; height: 11rem; }
 	header .apps .app { height: auto; }
-	.menu-items { list-style: none; opacity: 0; margin: 0; padding: 0; height: 0; border-bottom: 2px solid var(--color); border-top: 0; transition: height 1s ease-in-out, 2s opacity ease-in-out; }
+	.menu-items { list-style: none; opacity: 0; margin: 0; margin-top: 10px; padding: 0; height: 0; border-top: 0; transition: height 1s ease-in-out, 2s opacity ease-in-out; }
 	.menu-items.selected { background-color: var(--color); color: white; }
 	.menu_items__item { padding-left: 3rem; font-weight: 400; height: 0; width: 0; }
 	/* .menu_items__item:first-child { margin-top: 1rem; } */
@@ -65,6 +65,16 @@
 					<div data-bind="user.name__text" class="name"></div>
 				</div>
 
+				@{if CONF.allowclock}
+					<div style="display: flex; margin-top: 15px;">
+						@{if !user.guest && CONF.allowstatus} @{fi}
+						<div class="datetime" style="flex-grow: 1;">
+							<div data---="time"></div>
+						</div>
+						<button style="position: absolute; left: 5px;" class="status exec" data-exec="view/status" data-bind="user.statusid__html:Thelpers.status(value, true)__|__common.statusid__.warning:value==null"></button>
+					</div>
+				@{fi}
+
 				<!-- <div style="display:flex;">
 					<img src="./Microsoft_logo_(2012).svg.png" alt="logo" style="width:20rem;">
 				</div> -->
@@ -74,7 +84,7 @@
 			<div data---="viewbox__user.apps__margin:@{if CONF.allowclock}100@{else}55@{fi};scrollbar:1;visibleY:0;scrollbarshadow:1" class="invisible app__viewbox">
 
 				@{part('menu')}
-				<div style='background-color: red !important;'>
+				<div>
 					<div data-bind="user.noapps__hide">
 						<div class="apps" style="background-image: linear-gradient(315deg,#f1dfd1 0%,#f6f0ea 74%);">
 							<div data---="movable__null__selector:.app;exec:view/sort" data-bind="user.apps__template:.app">
@@ -100,7 +110,6 @@
 					<div class="apps" style="background-image: linear-gradient(315deg,#f1dfd1 0%,#f6f0ea 74%); border-radius: 1rem; padding: 2rem 0;">
 					
 						@{if !user.guest}
-							<b>Applications:</b>
 							<div data-bind="user.apps__template:.app">
 								<script type="text/html">
 									{{ foreach m in value }}
@@ -131,68 +140,69 @@
 						@{fi}
 
 					</div>
+					
+					<div class="apps" style="background-image: linear-gradient(315deg,#f1dfd1 0%,#f6f0ea 74%); border-radius: 10px; padding: 10px 0; margin-top: 20px;">
+						
+						@{if CONF.allowprofile}
+							<div class="app app-head exec" data-exec="openplatform/profile" data-id="profile">
+								<div class="icon"><i class="fas fa-user-circle"></i></div>
+								@(My account)
+							</div>
+						@{fi}
 
+						@{if CONF.allowmembers}
+							<div class="app app-head exec" data-exec="openplatform/members">
+								<div class="icon"><i class="fa fa-users"></i></div>
+								@(Members)
+							</div>
+						@{ fi }
+
+						<div class="app app-head exec" data-exec="openplatform/sessions">
+							<div class="icon"><i class="fa fa-history"></i></div>
+							@(My sessions)
+						</div>
+
+						@{if user.pin}
+							<div class="app app-head exec" data-exec="openplatform/lock">
+								<div class="icon"><i class="fa fa-lock"></i></div>
+								@(Lock screen)
+							</div>
+						@{fi}
+
+						<div class="app app-head exec" data-exec="openplatform/console" data-bind="common.consolecount__.b">
+							<div class="icon"><i class="fa fa-clipboard-list"></i></div>
+							@(Console)
+						</div>
+
+						<div class="app app-head exec" data-exec="openplatform/logout">
+							<div class="icon"><i class="fa fa-power-off red"></i></div>
+							@(Sign out)
+						</div>
+
+						<!-- @{if CONF.allowclock}
+							<div style="display: flex;">
+								@{if !user.guest && CONF.allowstatus} @{fi}
+								<div class="datetime" style="flex-grow: 1;">
+									<div data---="time"></div>
+								</div>
+								<button style="position: absolute; right: 0;" class="status exec" data-exec="view/status" data-bind="user.statusid__html:Thelpers.status(value, true)__|__common.statusid__.warning:value==null"></button>
+							</div>
+						@{fi} -->
+
+							<!-- logo -->
+							<div style="width: 100%; text-align: center; margin-top: 20px;">
+								<img src="./logo.png" alt="Your logo" style="width: 110px;">
+							</div>
+
+
+					</div>
 				<!-- end of red bg -->
 				</div>
 			
 			<!-- end of viewbox -->
 			</div>
 			
-			<div style="background-image: linear-gradient(315deg,#f1dfd1 0%,#f6f0ea 74%); margin-top: -525px; border-radius: 10px; padding: 10px 0;">
-				
-				@{if CONF.allowprofile}
-					<div class="app app-head exec" data-exec="openplatform/profile" data-id="profile">
-						<div class="icon"><i class="fas fa-user-circle"></i></div>
-						@(My account)
-					</div>
-				@{fi}
-
-				@{if CONF.allowmembers}
-					<div class="app app-head exec" data-exec="openplatform/members">
-						<div class="icon"><i class="fa fa-users"></i></div>
-						@(Members)
-					</div>
-				@{ fi }
-
-				<div class="app app-head exec" data-exec="openplatform/sessions">
-					<div class="icon"><i class="fa fa-history"></i></div>
-					@(My sessions)
-				</div>
-
-				@{if user.pin}
-					<div class="app app-head exec" data-exec="openplatform/lock">
-						<div class="icon"><i class="fa fa-lock"></i></div>
-						@(Lock screen)
-					</div>
-				@{fi}
-
-				<div class="app app-head exec" data-exec="openplatform/console" data-bind="common.consolecount__.b">
-					<div class="icon"><i class="fa fa-clipboard-list"></i></div>
-					@(Console)
-				</div>
-
-				<div class="app app-head exec" data-exec="openplatform/logout">
-					<div class="icon"><i class="fa fa-power-off red"></i></div>
-					@(Sign out)
-				</div>
-
-				@{if CONF.allowclock}
-					<div style="display: flex;">
-						@{if !user.guest && CONF.allowstatus} @{fi}
-						<div class="datetime" style="flex-grow: 1;">
-							<div data---="time"></div>
-						</div>
-						<button style="position: absolute; right: 0;" class="status exec" data-exec="view/status" data-bind="user.statusid__html:Thelpers.status(value, true)__|__common.statusid__.warning:value==null"></button>
-					</div>
-
-					<!-- logo -->
-					<div style="width: 100%; text-align: center; margin-top: 20px;">
-						<img src="./logo.png" alt="Your logo" style="width: 110px;">
-					</div>
-
-				@{fi}
-
-			</div>
+			
 
 		</header>
 

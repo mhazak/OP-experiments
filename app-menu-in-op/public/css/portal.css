@@ -12,7 +12,7 @@ header .status { width: 45px; background-color: transparent; height: 45px; borde
 header .status i { transition: all 0.3s; }
 header .status:hover { opacity: 0.9; }
 header .status.warning:before { content: '\f071'; font-family: 'Font Awesome 5 Free', 'Font Awesome 5 Pro'; font-weight: 400; color: #ff7a00; text-align: center; width: 12px; height: 12px; line-height: 12px; border-radius: 100px; position: absolute; font-size: 9px; font-weight: bold; margin: 25px 0 0 15px; z-index: 5; }
-header .datetime { text-align: center; font-size: 12px; padding: 5px 0 0; }
+header .datetime { font-size: 12px; padding: 5px 0 0; margin-left: 54px; }
 header .menu { float: left; width: 45px; height: 45px; border: 0; background-color: transparent; font-size: 16px; padding: 3px 0 0 3px; border-radius: var(--radius) 0 0 var(--radius); }
 .menushow header .menu, header .menu:hover { background-color: var(--color); }
 .menushow header .menu b, header .menu:hover b { background-color: #FFF; }
@@ -82,9 +82,9 @@ footer .sa i { margin-right: 5px; }
 
 .ui-dark footer { background: rgba(0,0,0,0.8); box-shadow: 0 -3px 10px rgba(0,0,0,0.3); }
 
-.iframe { border-radius: 10px; margin-top: 2rem; }
+.iframe {  }
 .ui-dark .iframe { background-color: #202020; }
-.iframe iframe { width: 100%; height: 100%; border-radius: 10px; }
+.iframe iframe { width: 100%; height: 100%; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; }
 .disable iframe { pointer-events: none; }
 
 .mobilemenu-buttons { position: absolute; bottom: 15px; left: 15px; right: 15px; height: 40px; background: rgba(255,255,255,0.8); border-radius: var(--radius); box-shadow: 0 3px 10px rgba(0,0,0,0.1); display: none; }
@@ -108,7 +108,7 @@ footer .sa i { margin-right: 5px; }
 /* .focused { box-shadow: 0 5px 20px rgba(0,0,0,0.2); } */
 .animation .focused .process-title { display: none; }
 .focused .process-title { visibility: visible; }
-.process-title { height: 8rem; border-radius: 10px; background-image: linear-gradient(315deg,#f1dfd1 0%,#f6f0ea 74%); background-color: #f1dfd1; font-size: 12px; visibility: hidden; border-bottom: 1px solid rgba(0,0,0,0.1); }
+.process-title { height: 3rem; border-top-left-radius: 10px; border-top-right-radius: 10px; background-image: linear-gradient(315deg,#f1dfd1 0%,#f6f0ea 74%); background-color: #f1dfd1; font-size: 12px; visibility: hidden; border-bottom: 1px solid rgba(0,0,0,0.1); }
 .process-title label { line-height: 26px; margin: 0 70px 0 10px; display: block; font-weight: bold; }
 .process-title label i { width: 13px; margin-right: 5px; }
 .process-title .close { float: right; width: 26px; height: 26px; border-left: 1px solid rgba(0,0,0,0.1); text-align: center; line-height: 26px; color: red; cursor: pointer; }
