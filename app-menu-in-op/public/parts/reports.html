@@ -2446,12 +2446,13 @@
 	.dg .ui-scrollbar-y { margin-top: 54px; }
 	.dg .dg-header-scrollbar > .ui-scrollbar-area { overflow-y: hidden; }
 	.dg .dg-body-scrollbar > .ui-scrollbar-area { overflow-x: hidden; }
-	.dg-container { overflow: hidden; border-top: 1px solid #E0E0E0; border-left: 1px solid #E0E0E0; border-right: 1px solid #E0E0E0; position: relative; }
+	.dg-container { overflow: hidden; border-top: 1px solid #E0E0E0; border-left: 1px solid #E0E0E0; border-right: 1px solid #E0E0E0; position: relative; border-top-right-radius: 10px;
+    border-top-left-radius: 10px; }
 	.dg-mobile .dg-container { border-right: 1px solid #E0E0E0; border-bottom: 1px solid #E0E0E0; }
 	.dg-header { position: relative; border-bottom: 1px solid #E0E0E0; }
 	.dg-hrow { height: 53px; background-color: var(--color); color: white; border-radius: 10px; }
 	.dg-hcol { float: left; border-left: none !important; height: 54px; font-weight: bold; position: relative; }
-	.dg-sort { float: right; font-size: 11px; width: 20px; text-align: center; padding: 9px 0 0 0; color: var(--color); }
+	.dg-sort { float: right; font-size: 11px; width: 20px; text-align: center; padding: 9px 0 0 0; color: white; }
 	.dg-monospace { font-family: Menlo,Consolas,monospace; font-size: 11px; }
 	.dg-btn-columns { cursor: pointer; color: #D0D0D0; font-size: 20px; position: absolute; right: 0; height: 55px; background-color: #D0D0D0; width: 13px; text-align: left; z-index: 3; }
 	.dg-btn-columns span { display: block; padding-top: 4px; font-size: 6px; color: gray; text-align: center; }
@@ -2492,16 +2493,16 @@
 	.dg-row-empty { height: 28px; font-size: 12px; border-bottom: none !important; background-color: transparent !important; cursor: default; }
 	.dg-footer { border: 1px solid #E0E0E0; border-top: 0; height: 32px; }
 	.dg-pagination { float: left; }
-	.dg-pagination button { background-color: #FFF; border: 0; border-left: 1px solid #E0E0E0; height: 31px; width: 34px; color: #000; font-size: 12px; text-align: center; outline: 0; }
+	.dg-pagination button { background-color: #FFF; border: 0; height: 31px; width: 34px; color: white; font-size: 12px; text-align: center; outline: 0; }
 	.dg-pagination button:hover { background-color: #F0F0F0; }
-	.dg-pagination button:disabled { background-color: #F9F9F9; color: #A0A0A0; }
+	.dg-pagination button:disabled { background-color: transparent; color: #A0A0A0; }
 	.dg-pagination button:first-child { border-left: 0; }
-	.dg-pagination button[name='page-prev'] { border-right: 1px solid #E0E0E0; width: 34px; }
-	.dg-pagination button[name='page-last'] { border-right: 1px solid #E0E0E0; }
-	.dg-pagination input { width: 40px; text-align: center; border: 0; outline: 0; font-size: 12px; padding: 0; margin: 0; background: transparent; }
+	.dg-pagination button[name='page-prev'] { border-right: none; width: 34px; }
+	.dg-pagination button[name='page-last'] { border-right: none; }
+	.dg-pagination input { width: 40px; text-align: center; border: 0; outline: 0; font-size: 12px; padding: 0; margin: 0; background: transparent; font-weight: 300; }
 	.dg-pagination > div { position: relative; display: inline-block; }
-	.dg-pagination-items { float: right; font-size: 12px; margin: 7px 10px 0 0; font-weight: bold; }
-	.dg-pagination-pages { float: left; font-size: 12px; margin: 7px 0 0 10px; }
+	.dg-pagination-items { float: right; font-size: 12px; margin: 7px 10px 0 0; font-weight: 300; }
+	.dg-pagination-pages { float: left; font-size: 12px; margin: 7px 0 0 10px; font-weight: 300; }
 	.dg-visible { visibility: visible; }
 	.dg-columns { position: absolute; right: 0; top: 35px; width: 182px; background-color: #FFF; z-index: 1; box-shadow: 0 5px 20px rgba(0,0,0,0.1); border-radius: var(--color); font-size: 12px; line-height: 16px; z-index: 6; color: #000; border: 1px solid #E0E0E0; user-select: none; }
 	.dg-columns-checkbox > span { border-radius: var(--radius); border: 1px solid #D0D0D0; margin: 2px 5px 0 0; font-size: 8px; color: #FFF; width: 12px; height: 12px; line-height: 12px; float: left; text-align: center; }
@@ -2543,7 +2544,7 @@
 	.dg-noscroll .ui-scrollbar-area { overflow-y: hidden; }
 	.dg-noscroll .ui-scrollbar-y span { visibility: hidden; }
 	.dg-noborder .dg-container { border: 0; }
-	.dg-noborder .dg-footer { border: 0; border-top: 1px solid #E0E0E0; }
+	.dg-noborder .dg-footer { border: 0; border-top: 1px solid #4d4646; color: white; background-color: var(--color); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; }
 	.dg-header-scrollbar { overflow-y: hidden; }
 	.dg-header-scrollbar-container { height: 58px; overflow: hidden; }
 	.dg-resize-line { position: absolute; width: 1px; background-color: #E0E0E0; z-index: 6; }
@@ -2628,7 +2629,7 @@
 		</div>
 	</div>
 
-	<div data---="datagrid__?.items__height:.ui-layout-section;exec:?/filter;highlight:true;click:?.selected;dblclick:?/edit;checked:?.checked;noborder:1;margin:45;button:?/button;height:600" style="margin: 0 50px;">
+	<div data---="datagrid__?.items__height:.ui-layout-section;exec:?/filter;highlight:true;click:?.selected;dblclick:?/edit;checked:?.checked;noborder:1;margin:45;button:?/button;height:600" style="margin: 0 15px;">
 		<script type="text/plain">
 			[
 				{ name: 'id', text: '@(ID)', width: 140, hide: true },
