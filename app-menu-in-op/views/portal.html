@@ -27,9 +27,10 @@
 	.menu-items { list-style: none; opacity: 0; margin: 0; padding: 0; height: 0; border-bottom: 2px solid var(--color); border-top: 0; transition: height 1s ease-in-out, 2s opacity ease-in-out; }
 	.menu-items.selected { background-color: var(--color); color: white; }
 	.menu_items__item { padding-left: 3rem; font-weight: 400; }
+	/* .menu_items__item:first-child { margin-top: 1rem; } */
 	.menu_items__item--icon { color: var(--color); margin-right: 10px; }
 	.apps, .header { transition: .5s; }
-	.app-head { border-top-left-radius: 10px; border-top-right-radius: 10px; }
+	.app-head { border-radius: 10px; width: 90%; margin-left: 1rem; }
 	.apps:hover, .header:hover { transform: scale(1.05); }
 	.apps:hover .ui-viewbox { overflow: unset !important; }
 	header .ui-viewbox, .ui-scrollbar, .ui-scrollbar-area { overflow: unset; overflow-x: unset !important; }
@@ -163,15 +164,18 @@
 				</div>
 			</div>
 			
-			<div style="margin-top: -100px;">
+			<div style="background-image: linear-gradient(315deg,#f1dfd1 0%,#f6f0ea 74%); margin-top: -125px; border-radius: 10px; padding: 10px 0;">
 				
 				@{if CONF.allowclock}
 				@{if !user.guest && CONF.allowstatus}
 				<button class="status exec" data-exec="view/status" data-bind="user.statusid__html:Thelpers.status(value, true)__|__common.statusid__.warning:value==null"></button>
 				@{fi}
-				<div class="datetime" style="background-image: linear-gradient(315deg,#f1dfd1 0%,#f6f0ea 74%); border-radius: 10px;">
-					<img src="./logo.png" alt="Your logo" style="width: 160px;">
+				<div class="datetime">
 					<div data---="time"></div>
+				</div>
+				<!-- logo -->
+				<div style="width: 100%; text-align: center; margin-top: 10px;">
+					<img src="./logo.png" alt="Your logo" style="width: 130px;">
 				</div>
 				@{fi}
 			</div>
